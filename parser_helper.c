@@ -45,7 +45,7 @@ term_z *create_term_z(int arraySize){
 	return temp_term;
 }
 
-degrees_t* generate_long_int_exponents(int arraySize){
+degrees_t* generate_long_int_exponents(int arraySize ){
     degrees_t* temp_exponents = calloc(arraySize, sizeof(unsigned long int));
     if(!temp_exponents){
         parser_error_with_errno_reason(PARSER_NOALLOC, __FILE__, __func__, __LINE__);
