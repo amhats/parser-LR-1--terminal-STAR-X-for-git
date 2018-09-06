@@ -50,6 +50,12 @@ test:
 example:
 	cd examples && $(MAKE)
 
+perf-test:
+	sudo perf stat -B -e cache-references,cache-misses,cycles,instructions,branches,faults,migrations ./parser -f data.txt
+
+valgrind-test:
+	valgrind --leak-check=full --show-reachable=yes --track-origins=yes -v ./parser -f data.txt
+
 clean:
 	rm *.o *.tab.o *.yy.o *.gch *.a *.so *.output lib/*.a *.tab.* *.yy.* examples/myparser tests/test parser
 
