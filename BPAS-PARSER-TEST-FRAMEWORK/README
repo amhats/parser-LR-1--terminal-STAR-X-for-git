@@ -1,0 +1,12 @@
+##Must export this to your .bashrc or .profile inorder for the testframe to work properly
+
+export PATH=$PATH:~/maple2017/bin
+ 
+#Maple C
+export LIBRARY_PATH=~/maple2017/bin.X86_64_LINUX:$LIBRARY_PATH
+export MAPLE_HOME=~/maple2017
+export LIBRARY_PATH=$LIBRARY_PATH:$MAPLE_HOME/bin.X86_64_LINUX
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MAPLE_HOME/bin.X86_64_LINUX
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$MAPLE_HOME/extern/include
+export MAPLE=$MAPLE_HOME
+
