@@ -477,9 +477,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    63,    63,    71,    72,    74,   104,   149,   192,   235,
-     251,   282,   314,   338,   373,   389,   406,   415,   424,   432,
-     441,   444,   445,   446
+       0,    63,    63,    77,    78,    80,   110,   162,   205,   248,
+     264,   295,   325,   349,   384,   400,   417,   426,   435,   443,
+     452,   455,   456,   457
 };
 #endif
 
@@ -1273,28 +1273,34 @@ yyreduce:
     {
 																	// altarr_data = $2;
 																	// return PARSER_SUCCESS;	
-																	if(g_coef_type == GMP_MPQ)
+																	if(g_coef_type == GMP_MPQ){
 																		print_poly_to_terminal((yyvsp[0].AltArr_t_type), g_variables, g_num_variables);	
-																	else
-																		print_poly_to_terminal_z((yyvsp[0].AltArr_t_type), g_variables, g_num_variables);		
-																}
-#line 1282 "parser_grammar.tab.c" /* yacc.c:1646  */
-    break;
+																		print_naked_AltArr_t_poly((yyvsp[0].AltArr_t_type));
+																	}else{
+																		print_poly_to_terminal_z((yyvsp[0].AltArr_t_type), g_variables, g_num_variables);	
+																	}	
 
-  case 3:
-#line 71 "parser_grammar.y" /* yacc.c:1646  */
-    {}
+																	free2DArray(g_variables, g_num_variables);
+																	g_variables = NULL;
+																	g_num_variables = 0;
+																}
 #line 1288 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
-  case 4:
-#line 72 "parser_grammar.y" /* yacc.c:1646  */
+  case 3:
+#line 77 "parser_grammar.y" /* yacc.c:1646  */
     {}
 #line 1294 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
+  case 4:
+#line 78 "parser_grammar.y" /* yacc.c:1646  */
+    {}
+#line 1300 "parser_grammar.tab.c" /* yacc.c:1646  */
+    break;
+
   case 5:
-#line 74 "parser_grammar.y" /* yacc.c:1646  */
+#line 80 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	if(g_coef_type == GMP_MPQ){
 																		if(is_new_var){
@@ -1325,11 +1331,11 @@ yyreduce:
 																			print_poly_to_terminal_z((yyval.AltArr_t_type), g_variables, g_num_variables);
 																	#endif
 																}
-#line 1329 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1335 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 104 "parser_grammar.y" /* yacc.c:1646  */
+#line 110 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	if(g_coef_type == GMP_MPQ){
 																		if(is_new_var){
@@ -1337,9 +1343,16 @@ yyreduce:
 																		}
 																		AltArr_t *temp_aa_result = makePolynomial_AA(DEFAULT_AA_SIZE, g_num_variables);
 																		mergeSortPolynomial_AA((yyvsp[-2].AltArr_t_type));
+																		printf("DELETE ME $1>>>>>> ");
+																		print_poly_to_terminal((yyvsp[-2].AltArr_t_type), g_variables, g_num_variables);
 																		negatePolynomial_AA((yyvsp[0].AltArr_t_type));
 																		mergeSortPolynomial_AA((yyvsp[0].AltArr_t_type));
+																		printf("DELETE ME $3>>>>>> ");
+																		print_poly_to_terminal((yyvsp[0].AltArr_t_type), g_variables, g_num_variables);
 																		temp_aa_result = addPolynomials_AA((yyvsp[-2].AltArr_t_type), (yyvsp[0].AltArr_t_type), g_num_variables);
+																		printf("DELETE ME temp_aa_result >>>>>> ");
+																		print_naked_AltArr_t_poly2(temp_aa_result, g_variables, g_num_variables, "***");
+																		print_naked_AltArr_t_poly(temp_aa_result);
 																		(yyval.AltArr_t_type) = temp_aa_result;
 
 																		#ifdef PARSER_DEBUG
@@ -1375,11 +1388,11 @@ yyreduce:
 																		freePolynomial_AAZ((yyvsp[0].AltArr_t_type));
 																	}
 																}
-#line 1379 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1392 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 149 "parser_grammar.y" /* yacc.c:1646  */
+#line 162 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	if(g_coef_type == GMP_MPQ){
 																		if(is_new_var){
@@ -1423,11 +1436,11 @@ yyreduce:
 																		freePolynomial_AAZ((yyvsp[0].AltArr_t_type));
 																	}
 																}
-#line 1427 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1440 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 192 "parser_grammar.y" /* yacc.c:1646  */
+#line 205 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	if(g_coef_type == GMP_MPQ){
 																		if(is_new_var){
@@ -1471,11 +1484,11 @@ yyreduce:
 																		freePolynomial_AAZ((yyvsp[0].AltArr_t_type));
 																	}
 																}
-#line 1475 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1488 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 235 "parser_grammar.y" /* yacc.c:1646  */
+#line 248 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	(yyval.AltArr_t_type) = (yyvsp[-1].AltArr_t_type);
 
@@ -1492,11 +1505,11 @@ yyreduce:
 																			print_poly_to_terminal_z((yyval.AltArr_t_type), g_variables, g_num_variables);
 																	#endif
 																}
-#line 1496 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1509 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 251 "parser_grammar.y" /* yacc.c:1646  */
+#line 264 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	if(g_coef_type == GMP_MPQ){
 																		AltArr_t *temp_aa_result = makePolynomial_AA(DEFAULT_AA_SIZE, g_num_variables);
@@ -1528,14 +1541,13 @@ yyreduce:
 																		freePolynomial_AAZ((yyvsp[-3].AltArr_t_type));
 																	}
 																}
-#line 1532 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1545 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 282 "parser_grammar.y" /* yacc.c:1646  */
+#line 295 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	if(g_coef_type == GMP_MPQ){
-																		printf("+++++++ was here MPQ ++++++++++\n");
 																		AltArr_t *temp_aa = makePolynomial_AA(DEFAULT_AA_SIZE, g_num_variables);
 																		term *temp_term = (yyvsp[0].term_type);
 																		add_packed_degree_term_to_smqp_aa(temp_aa, temp_term->exp, temp_term->coef, g_num_variables);
@@ -1549,7 +1561,6 @@ yyreduce:
 																		#endif
 																		free_term(temp_term);
 																	}else if(g_coef_type == GMP_MPZ){
-																		printf("+++++++ was here MPZ ++++++++++\n");
 																		AltArrZ_t *temp_aa = makePolynomial_AAZ(DEFAULT_AA_SIZE, g_num_variables);	
 																		term_z *temp_term_z = (yyvsp[0].term_type);
 																		add_packed_degree_term_to_smzp_aaz(temp_aa, temp_term_z->exp, temp_term_z->coef, g_num_variables);
@@ -1564,11 +1575,11 @@ yyreduce:
 																		free_term_z(temp_term_z);
 																	}
 																}
-#line 1568 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1579 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 314 "parser_grammar.y" /* yacc.c:1646  */
+#line 325 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	if(g_coef_type == GMP_MPQ){
 																		term *local_term = create_term(g_num_variables);
@@ -1593,11 +1604,11 @@ yyreduce:
 																	#endif
 																	free((yyvsp[0].string_type));
 																}
-#line 1597 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1608 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 338 "parser_grammar.y" /* yacc.c:1646  */
+#line 349 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	if(g_coef_type == GMP_MPQ){
 																		term *local_term = create_term(g_num_variables);
@@ -1632,11 +1643,11 @@ yyreduce:
 																	free((yyvsp[0].powervar_type)->var);
 																	free((yyvsp[0].powervar_type));
 																}
-#line 1636 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1647 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 373 "parser_grammar.y" /* yacc.c:1646  */
+#line 384 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	is_new_var = 0;
 																	if(!is_all_var_defined && !check_if_it_exists(g_variables, (yyvsp[0].string_type), g_num_variables)){
@@ -1653,11 +1664,11 @@ yyreduce:
 																	#endif
 																	free((yyvsp[0].string_type));
 																}
-#line 1657 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1668 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 389 "parser_grammar.y" /* yacc.c:1646  */
+#line 400 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	is_new_var = 0;
 																	if(!is_all_var_defined && !check_if_it_exists(g_variables, (yyvsp[-2].string_type), g_num_variables)){
@@ -1674,11 +1685,11 @@ yyreduce:
 																	#endif
 																	free((yyvsp[-2].string_type));
 																}
-#line 1678 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1689 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 406 "parser_grammar.y" /* yacc.c:1646  */
+#line 417 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	(yyval.string_type) = strdup((yyvsp[0].string_type));
 																	#ifdef PARSER_DEBUG
@@ -1687,11 +1698,11 @@ yyreduce:
 																	#endif
 																	free((yyvsp[0].string_type));
 																}
-#line 1691 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1702 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 415 "parser_grammar.y" /* yacc.c:1646  */
+#line 426 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	(yyval.string_type) = strdup((yyvsp[0].string_type));
 																	#ifdef PARSER_DEBUG
@@ -1700,11 +1711,11 @@ yyreduce:
 																	#endif
 																	free((yyvsp[0].string_type));
 																}
-#line 1704 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1715 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 424 "parser_grammar.y" /* yacc.c:1646  */
+#line 435 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	(yyval.string_type) = strdup((yyvsp[0].string_type));
 																	#ifdef PARSER_DEBUG
@@ -1713,11 +1724,11 @@ yyreduce:
 																	#endif
 																	free((yyvsp[0].string_type));
 																}
-#line 1717 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1728 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 432 "parser_grammar.y" /* yacc.c:1646  */
+#line 443 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	(yyval.string_type) = strdup((yyvsp[0].string_type));
 																	#ifdef PARSER_DEBUG
@@ -1726,40 +1737,40 @@ yyreduce:
 																	#endif	
 																	free((yyvsp[0].string_type));
 																}
-#line 1730 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1741 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 441 "parser_grammar.y" /* yacc.c:1646  */
+#line 452 "parser_grammar.y" /* yacc.c:1646  */
     { 
 																	g_variables = push_back_dynamic(g_variables, &g_num_variables, (yyvsp[0].string_type));
 																}
-#line 1738 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1749 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 444 "parser_grammar.y" /* yacc.c:1646  */
+#line 455 "parser_grammar.y" /* yacc.c:1646  */
     {}
-#line 1744 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1755 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 445 "parser_grammar.y" /* yacc.c:1646  */
+#line 456 "parser_grammar.y" /* yacc.c:1646  */
     { is_all_var_defined = 1;}
-#line 1750 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1761 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 446 "parser_grammar.y" /* yacc.c:1646  */
+#line 457 "parser_grammar.y" /* yacc.c:1646  */
     {
 																	g_variables = push_back_dynamic(g_variables, &g_num_variables, (yyvsp[0].string_type));
 																	free((yyvsp[0].string_type));
 																}
-#line 1759 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1770 "parser_grammar.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1763 "parser_grammar.tab.c" /* yacc.c:1646  */
+#line 1774 "parser_grammar.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1987,7 +1998,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 452 "parser_grammar.y" /* yacc.c:1906  */
+#line 463 "parser_grammar.y" /* yacc.c:1906  */
 
 
 void yyerror(char *msg){

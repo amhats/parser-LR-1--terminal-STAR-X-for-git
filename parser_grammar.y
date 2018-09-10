@@ -63,10 +63,16 @@ int g_num_variables = 0;
 polynomial		: polynomial poly 								{
 																	// altarr_data = $2;
 																	// return PARSER_SUCCESS;	
-																	if(g_coef_type == GMP_MPQ)
+																	if(g_coef_type == GMP_MPQ){
 																		print_poly_to_terminal($2, g_variables, g_num_variables);	
-																	else
-																		print_poly_to_terminal_z($2, g_variables, g_num_variables);		
+																		print_naked_AltArr_t_poly($2);
+																	}else{
+																		print_poly_to_terminal_z($2, g_variables, g_num_variables);	
+																	}	
+
+																	free2DArray(g_variables, g_num_variables);
+																	g_variables = NULL;
+																	g_num_variables = 0;
 																}
 				| polynomial other 								{}
                 |                                       		{}
@@ -108,9 +114,16 @@ poly			:MINUS poly %prec UMINUS						{
 																		}
 																		AltArr_t *temp_aa_result = makePolynomial_AA(DEFAULT_AA_SIZE, g_num_variables);
 																		mergeSortPolynomial_AA($1);
+																		printf("DELETE ME $1>>>>>> ");
+																		print_poly_to_terminal($1, g_variables, g_num_variables);
 																		negatePolynomial_AA($3);
 																		mergeSortPolynomial_AA($3);
+																		printf("DELETE ME $3>>>>>> ");
+																		print_poly_to_terminal($3, g_variables, g_num_variables);
 																		temp_aa_result = addPolynomials_AA($1, $3, g_num_variables);
+																		printf("DELETE ME temp_aa_result >>>>>> ");
+																		print_naked_AltArr_t_poly2(temp_aa_result, g_variables, g_num_variables, "***");
+																		print_naked_AltArr_t_poly(temp_aa_result);
 																		$$ = temp_aa_result;
 
 																		#ifdef PARSER_DEBUG
@@ -281,7 +294,6 @@ poly			:MINUS poly %prec UMINUS						{
 																}
 				|term											{
 																	if(g_coef_type == GMP_MPQ){
-																		printf("+++++++ was here MPQ ++++++++++\n");
 																		AltArr_t *temp_aa = makePolynomial_AA(DEFAULT_AA_SIZE, g_num_variables);
 																		term *temp_term = $1;
 																		add_packed_degree_term_to_smqp_aa(temp_aa, temp_term->exp, temp_term->coef, g_num_variables);
@@ -295,7 +307,6 @@ poly			:MINUS poly %prec UMINUS						{
 																		#endif
 																		free_term(temp_term);
 																	}else if(g_coef_type == GMP_MPZ){
-																		printf("+++++++ was here MPZ ++++++++++\n");
 																		AltArrZ_t *temp_aa = makePolynomial_AAZ(DEFAULT_AA_SIZE, g_num_variables);	
 																		term_z *temp_term_z = $1;
 																		add_packed_degree_term_to_smzp_aaz(temp_aa, temp_term_z->exp, temp_term_z->coef, g_num_variables);
