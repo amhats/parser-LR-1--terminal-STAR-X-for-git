@@ -18,6 +18,12 @@ void print_naked_AltArr_t_poly_z(AltArrZ_t* aa) {
 void print_naked_AltArr_t_poly2(AltArr_t* aa, char **vars, int numvars, char *msg) {
 	for (int i = 0; i < aa->size; ++i) {
         degrees_t *deg = unpacked_degs(aa->elems[i].degs, aa->nvar);
+        //delete me start
+        printf("aa->nvar: %d\n", aa->nvar);
+        for(int i=0; i<aa->nvar; i++){
+            printf("exp : %lld\n", deg[i]);
+        }
+        //delete me ends
 		gmp_fprintf(stdout, "%s: %Qd ", msg, aa->elems[i].coef);
         for(int j=0; j<aa->nvar; j++){
             fprintf(stdout, "%s^%llu", vars[j], deg[j]);

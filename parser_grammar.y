@@ -114,16 +114,14 @@ poly			:MINUS poly %prec UMINUS						{
 																		}
 																		AltArr_t *temp_aa_result = makePolynomial_AA(DEFAULT_AA_SIZE, g_num_variables);
 																		mergeSortPolynomial_AA($1);
-																		printf("DELETE ME $1>>>>>> ");
-																		print_poly_to_terminal($1, g_variables, g_num_variables);
 																		negatePolynomial_AA($3);
 																		mergeSortPolynomial_AA($3);
-																		printf("DELETE ME $3>>>>>> ");
-																		print_poly_to_terminal($3, g_variables, g_num_variables);
 																		temp_aa_result = addPolynomials_AA($1, $3, g_num_variables);
+
 																		printf("DELETE ME temp_aa_result >>>>>> ");
 																		print_naked_AltArr_t_poly2(temp_aa_result, g_variables, g_num_variables, "***");
 																		print_naked_AltArr_t_poly(temp_aa_result);
+
 																		$$ = temp_aa_result;
 
 																		#ifdef PARSER_DEBUG
@@ -386,6 +384,9 @@ powerVariable	: variable										{
 																	if(!is_all_var_defined && !check_if_it_exists(g_variables, $1, g_num_variables)){
 																		g_variables = push_back_dynamic(g_variables, &g_num_variables, $1);
 																		is_new_var = 1;
+																	}
+																	for(int i=0; i<g_num_variables; i++){
+																		printf("p var: %s\n", g_variables[i]);
 																	}
 																	powervar *temp_power_var = create_power_var($1, 1);
 																	$$ = temp_power_var;
