@@ -46,7 +46,7 @@ term_z *create_term_z(int arraySize){
 }
 
 degrees_t* generate_long_int_exponents(int arraySize ){
-    degrees_t* temp_exponents = calloc(arraySize, sizeof(unsigned long int));
+    degrees_t* temp_exponents = calloc(arraySize, sizeof(degrees_t));
     if(!temp_exponents){
         parser_error_with_errno_reason(PARSER_NOALLOC, __FILE__, __func__, __LINE__);
     }
@@ -179,7 +179,12 @@ static void addTermSafe_AAZ(AltArrZ_t* aa, degrees_t d, const mpz_t coef){
 
 
 void add_packed_degree_term_to_smqp_aa(AltArr_t *aa, degrees_t *deg, ratNum_t coef, int numvar){
-    
+    //delete start
+    gmp_printf("before packed coef : %Qd\n", coef);
+    for(int i=0; i<numvar; i++){
+        printf("before packed deg : %lld\n", deg[i]);
+    }
+    //delete ends
     if(numvar == 0){ //will dump error message in the console complaining EXP and NVARS are empty
         numvar = 1;
     }

@@ -65,7 +65,7 @@ polynomial		: polynomial poly 								{
 																	// return PARSER_SUCCESS;	
 																	if(g_coef_type == GMP_MPQ){
 																		print_poly_to_terminal($2, g_variables, g_num_variables);	
-																		print_naked_AltArr_t_poly($2);
+																		// print_naked_AltArr_t_poly($2);
 																	}else{
 																		print_poly_to_terminal_z($2, g_variables, g_num_variables);	
 																	}	
@@ -118,8 +118,8 @@ poly			:MINUS poly %prec UMINUS						{
 																		mergeSortPolynomial_AA($3);
 																		temp_aa_result = addPolynomials_AA($1, $3, g_num_variables);
 
-																		printf("DELETE ME temp_aa_result >>>>>> ");
-																		print_naked_AltArr_t_poly2(temp_aa_result, g_variables, g_num_variables, "***");
+																		printf("DELETE ME temp_aa_result >>>>>>  \n");
+																		print_naked_AltArr_t_poly2(temp_aa_result, g_variables, g_num_variables, " *** ");
 																		print_naked_AltArr_t_poly(temp_aa_result);
 
 																		$$ = temp_aa_result;
@@ -380,7 +380,7 @@ term			: coef											{
 																}
 				;				
 powerVariable	: variable										{
-																	is_new_var = 0;
+																	// is_new_var = 0; // x^2-y*x wrong result returned the first time when this line is issued
 																	if(!is_all_var_defined && !check_if_it_exists(g_variables, $1, g_num_variables)){
 																		g_variables = push_back_dynamic(g_variables, &g_num_variables, $1);
 																		is_new_var = 1;
@@ -399,7 +399,7 @@ powerVariable	: variable										{
 																	free($1);
 																}
 				| variable POWER exponent						{
-																	is_new_var = 0;
+																	// is_new_var = 0; // x^2-y*x wrong result the first time returned when this line is issued
 																	if(!is_all_var_defined && !check_if_it_exists(g_variables, $1, g_num_variables)){
 																		g_variables = push_back_dynamic(g_variables, &g_num_variables, $1);
 																		is_new_var = 1;
